@@ -1,7 +1,7 @@
 %{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name: devede
-Version: 3.9
+Version: 3.10
 Release: 1%{?dist}
 Summary: DeVeDe is a program to create video DVDs and CDs (VCD, sVCD or CVD)
 
@@ -56,12 +56,15 @@ rm -rf $RPM_BUILD_ROOT
   --libdir=%{python_sitelib} \
   --pkgdocdir=%{_docdir}/%{name}-%{version}
 
-# rename .desktop file and fix it
+# remove debian files from doc
+rm $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/{copyright,changelog.Debian}
+
+# rename .desktop file 
 desktop-file-install \
   --delete-original \
   --vendor livna \
-  --dir $RPM_BUILD_ROOT/%{_datadir}/applications \
-  $RPM_BUILD_ROOT/%{_datadir}/applications/%{name}.desktop
+  --dir $RPM_BUILD_ROOT%{_datadir}/applications \
+  $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
 %find_lang %{name}
 
@@ -95,8 +98,11 @@ fi
 
 
 %changelog
+* Tue Aug 19 2008 Andrea Musuruane <musuruan@gmail.com> 3.10-1
+- Updated to version 3.10.
+
 * Sat Jun 28 2008 Andrea Musuruane <musuruan@gmail.com> 3.9-1
-- Updated to version 3.9
+- Updated to version 3.9.
 
 * Mon May 26 2008 Andrea Musuruane <musuruan@gmail.com> 3.8c-1
 - Updated to version 3.8c.
