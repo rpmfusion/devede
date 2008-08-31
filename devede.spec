@@ -1,7 +1,7 @@
 %{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name: devede
-Version: 3.11
+Version: 3.11b
 Release: 1%{?dist}
 Summary: DeVeDe is a program to create video DVDs and CDs (VCD, sVCD or CVD)
 
@@ -36,7 +36,7 @@ dependencies are really small.
 
 
 %prep
-%setup -q
+%setup -q -n %{name}-3.11
 
 # Fix devede module directory
 sed -i 's!/usr/lib/!%{python_sitelib}/!' devede.py
@@ -98,7 +98,10 @@ fi
 
 
 %changelog
-* Mon Aug 24 2008 Andrea Musuruane <musuruan@gmail.com> 3.11-1
+* Wed Aug 27 2008 Andrea Musuruane <musuruan@gmail.com> 3.11b-1
+- Updated to version 3.11b.
+
+* Mon Aug 25 2008 Andrea Musuruane <musuruan@gmail.com> 3.11-1
 - Updated to version 3.11.
 
 * Tue Aug 19 2008 Andrea Musuruane <musuruan@gmail.com> 3.10-1
