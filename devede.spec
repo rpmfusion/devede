@@ -2,7 +2,7 @@
 
 Name: devede
 Version: 3.11b
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: DeVeDe is a program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 Group: Applications/Multimedia
@@ -98,6 +98,9 @@ fi
 
 
 %changelog
+* Sat Dec 20 2008 Andrea Musuruane <musuruan@gmail.com> 3.11b-3
+- Rebuilt for python 2.6
+
 * Sun Oct 19 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 3.11b-2
 - rebuilt
 
