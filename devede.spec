@@ -1,8 +1,6 @@
-%{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
-
 Name: devede
 Version: 3.11b
-Release: 2%{?dist}
+Release: 4%{?dist}
 Summary: DeVeDe is a program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 Group: Applications/Multimedia
@@ -25,6 +23,7 @@ Requires: ImageMagick
 Requires: python >= 2.4
 Requires: pygtk2
 Requires: pygtk2-libglade
+Requires: dejavu-fonts
 
 %description
 DeVeDe is a program to create video DVDs and CDs (VCD, sVCD or CVD), 
@@ -39,7 +38,7 @@ dependencies are really small.
 %setup -q -n %{name}-3.11
 
 # Fix devede module directory
-sed -i 's!/usr/lib/!%{python_sitelib}/!' devede.py
+sed -i 's!/usr/lib/!%{_datadir}/!' devede.py
 
 
 %build
@@ -53,11 +52,15 @@ rm -rf $RPM_BUILD_ROOT
   --targeted=yes \
   --DESTDIR=$RPM_BUILD_ROOT \
   --prefix=%{_prefix} \
-  --libdir=%{python_sitelib} \
+  --libdir=%{_datadir} \
   --pkgdocdir=%{_docdir}/%{name}-%{version}
 
 # remove debian files from doc
 rm $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/{copyright,changelog.Debian}
+
+# replace devedesans.ttf with a symlink to DejaVuSans.ttf
+rm -rf $RPM_BUILD_ROOT%{_datadir}/%{name}/devedesans.ttf
+ln -s %{_datadir}/fonts/dejavu/DejaVuSans.ttf $RPM_BUILD_ROOT%{_datadir}/%{name}/devedesans.ttf
 
 # rename .desktop file 
 desktop-file-install \
@@ -89,15 +92,22 @@ fi
 
 %files -f %{name}.lang
 %defattr(-,root,root,-)
-%{_bindir}/devede
-%{python_sitelib}/devede
-%{_datadir}/devede
+%{_bindir}/%{name}
+%{_datadir}/%{name}
 %{_datadir}/applications/livna-%{name}.desktop
 %{_datadir}/pixmaps/%{name}.svg
 %doc %{_docdir}/%{name}-%{version}
 
 
 %changelog
+* Wed Jan 14 2009 Andrea Musuruane <musuruan@gmail.com> 3.11b-4
+- Used DejaVuSans.ttf instead of devedesans.ttf
+- Changed libdir to %%{_datadir} like other python packages
+- Improved macro usage
+
+* Sat Dec 20 2008 Andrea Musuruane <musuruan@gmail.com> 3.11b-3
+- Rebuilt for python 2.6
+
 * Sun Oct 19 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 3.11b-2
 - rebuilt
 
