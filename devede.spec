@@ -1,6 +1,6 @@
 Name: devede
-Version: 3.11b
-Release: 4%{?dist}
+Version: 3.12
+Release: 1%{?dist}
 Summary: DeVeDe is a program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 Group: Applications/Multimedia
@@ -35,7 +35,7 @@ dependencies are really small.
 
 
 %prep
-%setup -q -n %{name}-3.11
+%setup -q -n %{name}-%{version}
 
 # Fix devede module directory
 sed -i 's!/usr/lib/!%{_datadir}/!' devede.py
@@ -100,6 +100,9 @@ fi
 
 
 %changelog
+* Sun Jan 25 2009 Andrea Musuruane <musuruan@gmail.com> 3.12-1
+- Updated to version 3.12
+
 * Wed Jan 14 2009 Andrea Musuruane <musuruan@gmail.com> 3.11b-4
 - Used DejaVuSans.ttf instead of devedesans.ttf
 - Changed libdir to %%{_datadir} like other python packages
