@@ -1,5 +1,5 @@
 Name: devede
-Version: 3.12
+Version: 3.12c
 Release: 1%{?dist}
 Summary: DeVeDe is a program to create video DVDs and CDs (VCD, sVCD or CVD)
 
@@ -100,6 +100,9 @@ fi
 
 
 %changelog
+* Wed Jan 28 2009 Andrea Musuruane <musuruan@gmail.com> 3.12c-1
+- Updated to version 3.12c
+
 * Sun Jan 25 2009 Andrea Musuruane <musuruan@gmail.com> 3.12-1
 - Updated to version 3.12
 
