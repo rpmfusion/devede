@@ -1,12 +1,14 @@
 Name: devede
 Version: 3.12c
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: DeVeDe is a program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 Group: Applications/Multimedia
 License: GPLv3+
 URL: http://www.rastersoft.com/programas/devede.html
 Source0: http://www.rastersoft.com/descargas/%{name}-%{version}.tar.bz2
+# Mailed upstream on Apr 05 2009
+Patch0: %{name}-3.12c-greek.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch: noarch
@@ -40,6 +42,12 @@ dependencies are really small.
 
 %prep
 %setup -q -n %{name}-%{version}
+
+# Fix Greek translation
+%patch0 -p1
+pushd po
+./update_mo_files
+popd
 
 # Fix devede module directory
 sed -i 's!/usr/lib/!%{_datadir}/!' devede.py
@@ -104,6 +112,9 @@ fi
 
 
 %changelog
+* Mon Apr 06 2009 Andrea Musuruane <musuruan@gmail.com> 3.12c-3
+- Fixed greek translation (BZ #494)
+
 * Sat Mar 28 2009 Andrea Musuruane <musuruan@gmail.com> 3.12c-2
 - Fix font Requires: dejavu-fonts-compat
 
