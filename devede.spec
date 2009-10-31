@@ -1,7 +1,7 @@
 Name: devede
 Version: 3.12c
-Release: 3%{?dist}
-Summary: DeVeDe is a program to create video DVDs and CDs (VCD, sVCD or CVD)
+Release: 4%{?dist}
+Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 Group: Applications/Multimedia
 License: GPLv3+
@@ -26,7 +26,7 @@ Requires: python >= 2.4
 Requires: pygtk2
 Requires: pygtk2-libglade
 %if 0%{?fedora} >= 11
-Requires: dejavu-fonts-compat
+Requires: dejavu-sans-fonts
 %else
 Requires: dejavu-fonts
 %endif
@@ -112,6 +112,10 @@ fi
 
 
 %changelog
+* Sat Oct 31 2009 Andrea Musuruane <musuruan@gmail.com> 3.12c-4
+- Fixed font Requires on Fedora 11 and higher (BZ #891)
+- Fixed Summary
+
 * Mon Apr 06 2009 Andrea Musuruane <musuruan@gmail.com> 3.12c-3
 - Fixed greek translation (BZ #494)
 
