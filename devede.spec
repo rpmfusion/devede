@@ -1,14 +1,12 @@
 Name: devede
-Version: 3.12c
-Release: 4%{?dist}
+Version: 3.15.0
+Release: 1%{?dist}
 Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 Group: Applications/Multimedia
 License: GPLv3+
 URL: http://www.rastersoft.com/programas/devede.html
 Source0: http://www.rastersoft.com/descargas/%{name}-%{version}.tar.bz2
-# Mailed upstream on Apr 05 2009
-Patch0: %{name}-3.12c-greek.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch: noarch
@@ -23,13 +21,9 @@ Requires: vcdimager
 Requires: mkisofs
 Requires: ImageMagick
 Requires: python >= 2.4
-Requires: pygtk2
+Requires: pygtk2 >= 2.16
 Requires: pygtk2-libglade
-%if 0%{?fedora} >= 11
 Requires: dejavu-sans-fonts
-%else
-Requires: dejavu-fonts
-%endif
 
 %description
 DeVeDe is a program to create video DVDs and CDs (VCD, sVCD or CVD), 
@@ -43,14 +37,11 @@ dependencies are really small.
 %prep
 %setup -q -n %{name}-%{version}
 
-# Fix Greek translation
-%patch0 -p1
-pushd po
-./update_mo_files
-popd
-
 # Fix devede module directory
 sed -i 's!/usr/lib/!%{_datadir}/!' devede.py
+
+# Remove backup files
+find . -name *\~ -exec rm {} \;
 
 
 %build
@@ -89,17 +80,18 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %post
-touch --no-create %{_datadir}/icons/hicolor
-if [ -x %{_bindir}/gtk-update-icon-cache ]; then
-  %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
-fi
+touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %postun
-touch --no-create %{_datadir}/icons/hicolor
-if [ -x %{_bindir}/gtk-update-icon-cache ]; then
-  %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
+if [ $1 -eq 0 ] ; then
+    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
+    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 fi
+
+
+%posttrans
+gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %files -f %{name}.lang
@@ -112,6 +104,11 @@ fi
 
 
 %changelog
+* Sun Nov 29 2009 Andrea Musuruane <musuruan@gmail.com> 3.15.0-1
+- Updated to version 3.15
+- Now it requires gtk >= 2.16
+- Updated icon cache scriptlets
+
 * Sat Oct 31 2009 Andrea Musuruane <musuruan@gmail.com> 3.12c-4
 - Fixed font Requires on Fedora 11 and higher (BZ #891)
 - Fixed Summary
