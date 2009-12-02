@@ -1,5 +1,5 @@
 Name: devede
-Version: 3.15.0
+Version: 3.15.2
 Release: 1%{?dist}
 Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
@@ -69,6 +69,7 @@ ln -s %{_datadir}/fonts/dejavu/DejaVuSans.ttf $RPM_BUILD_ROOT%{_datadir}/%{name}
 desktop-file-install \
   --delete-original \
   --vendor livna \
+  --add-category X-OutputGeneration \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications \
   $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
@@ -97,6 +98,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %files -f %{name}.lang
 %defattr(-,root,root,-)
 %{_bindir}/%{name}
+%{_bindir}/%{name}_debug
 %{_datadir}/%{name}
 %{_datadir}/applications/livna-%{name}.desktop
 %{_datadir}/pixmaps/%{name}.svg
@@ -104,6 +106,10 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Wed Dec 02 2009 Andrea Musuruane <musuruan@gmail.com> 3.15.2-1
+- Updated to version 3.15.2
+- Updated desktop file categories as required by Fedora Studio
+
 * Sun Nov 29 2009 Andrea Musuruane <musuruan@gmail.com> 3.15.0-1
 - Updated to version 3.15
 - Now it requires gtk >= 2.16
