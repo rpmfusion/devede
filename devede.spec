@@ -1,5 +1,5 @@
 Name: devede
-Version: 3.15.2
+Version: 3.16.0
 Release: 1%{?dist}
 Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
@@ -35,7 +35,7 @@ dependencies are really small.
 
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q -n %{name}
 
 # Fix devede module directory
 sed -i 's!/usr/lib/!%{_datadir}/!' devede.py
@@ -106,6 +106,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sat Feb 13 2010 Andrea Musuruane <musuruan@gmail.com> 3.16.0-1
+- Updated to version 3.16.0
+
 * Wed Dec 02 2009 Andrea Musuruane <musuruan@gmail.com> 3.15.2-1
 - Updated to version 3.15.2
 - Updated desktop file categories as required by Fedora Studio
