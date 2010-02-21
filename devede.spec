@@ -1,5 +1,5 @@
 Name: devede
-Version: 3.16.0
+Version: 3.16.2
 Release: 1%{?dist}
 Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
@@ -26,8 +26,8 @@ Requires: pygtk2-libglade
 Requires: dejavu-sans-fonts
 
 %description
-DeVeDe is a program to create video DVDs and CDs (VCD, sVCD or CVD), 
-suitables for home players, from any number of video files, in any 
+DeVeDe is a program to create video DVDs and CDs (VCD, sVCD or CVD) 
+suitable for home players, from any number of video files, in any 
 of the formats supported by Mplayer. The big advantage over other 
 utilities is that it only needs Mplayer, Mencoder, DVDAuthor, VCDImager 
 and MKisofs (well, and Python 2.4, PyGTK and PyGlade), so its 
@@ -35,7 +35,7 @@ dependencies are really small.
 
 
 %prep
-%setup -q -n %{name}
+%setup -q
 
 # Fix devede module directory
 sed -i 's!/usr/lib/!%{_datadir}/!' devede.py
@@ -106,6 +106,10 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sun Feb 21 2010 Andrea Musuruane <musuruan@gmail.com> 3.16.2-1
+- Updated to version 3.16.2
+- Fixed description
+
 * Sat Feb 13 2010 Andrea Musuruane <musuruan@gmail.com> 3.16.0-1
 - Updated to version 3.16.0
 
