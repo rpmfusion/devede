@@ -1,5 +1,5 @@
 Name: devede
-Version: 3.16.2
+Version: 3.16.4
 Release: 1%{?dist}
 Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
@@ -106,6 +106,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Thu Feb 25 2010 Andrea Musuruane <musuruan@gmail.com> 3.16.4-1
+- Updated to version 3.16.4
+
 * Sun Feb 21 2010 Andrea Musuruane <musuruan@gmail.com> 3.16.2-1
 - Updated to version 3.16.2
 - Fixed description
