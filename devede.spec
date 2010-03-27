@@ -1,5 +1,5 @@
 Name: devede
-Version: 3.16.5
+Version: 3.16.6
 Release: 1%{?dist}
 Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
@@ -99,6 +99,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %defattr(-,root,root,-)
 %{_bindir}/%{name}
 %{_bindir}/%{name}_debug
+%{_bindir}/%{name}-debug
 %{_datadir}/%{name}
 %{_datadir}/applications/livna-%{name}.desktop
 %{_datadir}/pixmaps/%{name}.svg
@@ -106,6 +107,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sat Mar 20 2010 Andrea Musuruane <musuruan@gmail.com> 3.16.6-1
+- Updated to version 3.16.6
+
 * Sat Mar 13 2010 Andrea Musuruane <musuruan@gmail.com> 3.16.5-1
 - Updated to version 3.16.5
 
