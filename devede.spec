@@ -1,5 +1,5 @@
 Name: devede
-Version: 3.16.8
+Version: 3.16.9
 Release: 1%{?dist}
 Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
@@ -37,8 +37,11 @@ dependencies are really small.
 %prep
 %setup -q
 
-# Fix devede module directory
+# Fix module directory
 sed -i 's!/usr/lib/!%{_datadir}/!' devede.py
+
+# Fix help directory
+sed -i 's!/usr/share/doc/devede!%{_docdir}/%{name}-%{version}!' devede.py
 
 # Remove backup files
 find . -name *\~ -exec rm {} \;
@@ -107,6 +110,10 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sat Jul 03 2010 Andrea Musuruane <musuruan@gmail.com> 3.16.9-1
+- Updated to version 3.16.9
+- Fixed help directory
+
 * Mon Apr 19 2010 Andrea Musuruane <musuruan@gmail.com> 3.16.8-1
 - Updated to version 3.16.8
 
