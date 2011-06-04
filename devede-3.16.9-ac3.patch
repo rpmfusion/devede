@@ -1,0 +1,24 @@
+diff -durN devede-3.16.9.orig/devede_video_convert.py devede-3.16.9/devede_video_convert.py
+--- devede-3.16.9.orig/devede_video_convert.py	2010-04-18 22:27:34.000000000 +0200
++++ devede-3.16.9/devede_video_convert.py	2011-06-04 14:40:06.980318194 +0200
+@@ -464,7 +464,7 @@
+ 				if(copy_audio==False):
+ 					lavcopts+=":acodec="
+ 					if disctype=="dvd":
+-						lavcopts+="ac3"
++						lavcopts+="ac3_fixed"
+ 					else:
+ 						lavcopts+="mp2"
+ 					lavcopts+=":abitrate="+str(audiorate)
+diff -durN devede-3.16.9.orig/devede_xml_menu.py devede-3.16.9/devede_xml_menu.py
+--- devede-3.16.9.orig/devede_xml_menu.py	2010-01-27 23:52:18.000000000 +0100
++++ devede-3.16.9/devede_xml_menu.py	2011-06-04 14:40:17.817404921 +0200
+@@ -884,7 +884,7 @@
+ 			lavcopts=""
+ 		lavcopts+="vcodec=mpeg2video:sc_threshold=1000000000:cgop:trell:mbd=2:vstrict=0:"
+ 		lavcopts+="vrc_maxrate=7000:vrc_buf_size=1835:vbitrate=1000:keyint=12:"
+-		lavcopts+="acodec=ac3:abitrate=128:aspect="+wide
++		lavcopts+="acodec=ac3_fixed:abitrate=128:aspect="+wide
+ 		command_var.append(lavcopts)
+ 		command_var.append("-o")
+ 		command_var.append(currentfile)
