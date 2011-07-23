@@ -1,0 +1,12 @@
+diff -durN devede.orig/devede.py devede/devede.py
+--- devede.orig/devede.py	2011-07-03 23:34:22.000000000 +0200
++++ devede/devede.py	2011-07-19 18:41:31.772623147 +0200
+@@ -271,7 +271,7 @@
+ global_vars["sub_codepage"]="ISO-8859-1"
+ global_vars["sub_language"]="EN (ENGLISH)"
+ global_vars["with_menu"]=True
+-global_vars["AC3_fix"]=False
++global_vars["AC3_fix"]=True
+ global_vars["cores"]=get_cores()
+ #global_vars[""]=""
+ 

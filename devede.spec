@@ -1,15 +1,14 @@
 Name: devede
-Version: 3.16.9
-Release: 2%{?dist}
+Version: 3.17.0
+Release: 1%{?dist}
 Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 Group: Applications/Multimedia
 License: GPLv3+
 URL: http://www.rastersoft.com/programas/devede.html
 Source0: http://www.rastersoft.com/descargas/%{name}-%{version}.tar.bz2
-# Use the ac3_fixed codec in new mencoder
-# http://groups.google.com/group/devede-forum/browse_thread/thread/fe52bf7f4892d823
-Patch0: %{name}-3.16.9-ac3.patch
+# Enable AC3_fix by default
+Patch0: %{name}-3.17.0-ac3.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -39,7 +38,7 @@ dependencies are really small.
 
 
 %prep
-%setup -q
+%setup -q -n %{name}
 %patch0 -p1
 
 # Fix module directory
@@ -115,6 +114,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sat Jul 16 2011 Andrea Musuruane <musuruan@gmail.com> 3.17.0-1
+- Updated to version 3.17.0
+
 * Sat Jun 04 2011 Andrea Musuruane <musuruan@gmail.com> 3.16.9-2
 - Added a patch to use the ac3_fixed codec in new mencoder
 
