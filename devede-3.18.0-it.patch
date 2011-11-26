@@ -1,0 +1,12 @@
+diff -durN devede.orig/po/it_IT.po devede/po/it_IT.po
+--- devede.orig/po/it_IT.po	2011-11-21 00:31:52.000000000 +0100
++++ devede/po/it_IT.po	2011-11-26 13:10:39.619504084 +0100
+@@ -72,7 +72,7 @@
+ msgstr ""
+ "Il file o la cartella\n"
+ "\n"
+-"%(folder)\n"
++"%(folder)s\n"
+ "\n"
+ "esiste già. Se continui, sarà cancellata."
+ 

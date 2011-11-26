@@ -1,0 +1,13 @@
+diff -dur devede.orig/devede.py devede/devede.py
+--- devede.orig/devede.py	2011-11-20 13:26:23.000000000 +0100
++++ devede/devede.py	2011-11-23 19:32:05.840383230 +0100
+@@ -271,7 +271,7 @@
+ global_vars["sub_codepage"]="ISO-8859-1"
+ global_vars["sub_language"]="EN (ENGLISH)"
+ global_vars["with_menu"]=True
+-global_vars["AC3_fix"]=False
++global_vars["AC3_fix"]=True
+ global_vars["cores"]=get_cores()
+ global_vars["use_ffmpeg"]=False
+ global_vars["warning_ffmpeg"]=True
+Only in devede: devede.py.orig
