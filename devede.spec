@@ -1,5 +1,5 @@
 Name: devede
-Version: 3.18.0
+Version: 3.19.0
 Release: 1%{?dist}
 Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
@@ -9,8 +9,6 @@ URL: http://www.rastersoft.com/programas/devede.html
 Source0: http://www.rastersoft.com/descargas/%{name}-%{version}.tar.bz2
 # Enable AC3_fix by default
 Patch0: %{name}-3.18.0-ac3.patch
-# Fix a format error in the Italian translation
-Patch1: %{name}-3.18.0-it.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -43,10 +41,6 @@ dependencies are really small.
 %prep
 %setup -q -n %{name}
 %patch0 -p1
-%patch1 -p1
-pushd po
-./update_mo_files 
-popd
 
 # Fix module directory
 sed -i 's!/usr/lib/!%{_datadir}/!' devede.py
@@ -121,6 +115,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sun Nov 27 2011 Andrea Musuruane <musuruan@gmail.com> 3.19.0-1
+- Updated to version 3.19.0
+
 * Sat Nov 26 2011 Andrea Musuruane <musuruan@gmail.com> 3.18.0-1
 - Updated to version 3.18.0
 
