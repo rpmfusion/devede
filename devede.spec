@@ -1,5 +1,5 @@
 Name: devede
-Version: 3.19.0
+Version: 3.20.0
 Release: 1%{?dist}
 Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
@@ -23,6 +23,7 @@ Requires: ffmpeg
 Requires: dvdauthor
 Requires: vcdimager
 Requires: mkisofs
+Requires: brasero
 Requires: ImageMagick
 Requires: python >= 2.4
 Requires: pygtk2 >= 2.16
@@ -115,6 +116,10 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Fri Dec 09 2011 Andrea Musuruane <musuruan@gmail.com> 3.20.0-1
+- Updated to version 3.20.0
+- Added missing brasero dependency
+
 * Sun Nov 27 2011 Andrea Musuruane <musuruan@gmail.com> 3.19.0-1
 - Updated to version 3.19.0
 
