@@ -1,5 +1,5 @@
 Name: devede
-Version: 3.20.0
+Version: 3.21.0
 Release: 1%{?dist}
 Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
@@ -8,7 +8,7 @@ License: GPLv3+
 URL: http://www.rastersoft.com/programas/devede.html
 Source0: http://www.rastersoft.com/descargas/%{name}-%{version}.tar.bz2
 # Enable AC3_fix by default
-Patch0: %{name}-3.18.0-ac3.patch
+Patch0: %{name}-3.21.0-ac3.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -40,7 +40,7 @@ dependencies are really small.
 
 
 %prep
-%setup -q -n %{name}
+%setup -q
 %patch0 -p1
 
 # Fix module directory
@@ -116,6 +116,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sat Dec 31 2011 Andrea Musuruane <musuruan@gmail.com> 3.21.0-1
+- Updated to version 3.21.0
+
 * Fri Dec 09 2011 Andrea Musuruane <musuruan@gmail.com> 3.20.0-1
 - Updated to version 3.20.0
 - Added missing brasero dependency
