@@ -1,5 +1,5 @@
 Name: devede
-Version: 3.21.0
+Version: 3.22.0
 Release: 1%{?dist}
 Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
@@ -8,7 +8,7 @@ License: GPLv3+
 URL: http://www.rastersoft.com/programas/devede.html
 Source0: http://www.rastersoft.com/descargas/%{name}-%{version}.tar.bz2
 # Enable AC3_fix by default
-Patch0: %{name}-3.21.0-ac3.patch
+Patch0: %{name}-3.22.0-ac3.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -29,6 +29,8 @@ Requires: python >= 2.4
 Requires: pygtk2 >= 2.16
 Requires: pygtk2-libglade
 Requires: dejavu-sans-fonts
+Requires: hicolor-icon-theme
+
 
 %description
 DeVeDe is a program to create video DVDs and CDs (VCD, sVCD or CVD) 
@@ -44,10 +46,10 @@ dependencies are really small.
 %patch0 -p1
 
 # Fix module directory
-sed -i 's!/usr/lib/!%{_datadir}/!' devede.py
+sed -i 's!/usr/lib/!%{_datadir}/!' devede
 
 # Fix help directory
-sed -i 's!/usr/share/doc/devede!%{_docdir}/%{name}-%{version}!' devede.py
+sed -i 's!/usr/share/doc/devede!%{_docdir}/%{name}-%{version}!' devede
 
 # Remove backup files
 find . -name *\~ -exec rm {} \;
@@ -82,6 +84,11 @@ desktop-file-install \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications \
   $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
+# move icon into %%{_datadir}/icons/hicolor/
+mkdir -p %{buildroot}%{_datadir}/icons/hicolor/scalable/apps
+mv $RPM_BUILD_ROOT%{_datadir}/pixmaps/%{name}.svg \
+  $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/scalable/apps/
+
 %find_lang %{name}
 
 
@@ -111,11 +118,15 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_bindir}/%{name}-debug
 %{_datadir}/%{name}
 %{_datadir}/applications/livna-%{name}.desktop
-%{_datadir}/pixmaps/%{name}.svg
+%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
 %doc %{_docdir}/%{name}-%{version}
 
 
 %changelog
+* Sun May 27 2012 Andrea Musuruane <musuruan@gmail.com> 3.22.0-1
+- Updated to version 3.22.0
+- Moved icon in %%{_datadir}/icons/hicolor
+
 * Sat Dec 31 2011 Andrea Musuruane <musuruan@gmail.com> 3.21.0-1
 - Updated to version 3.21.0
 
