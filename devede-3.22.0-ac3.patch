@@ -1,0 +1,12 @@
+diff -durN devede-3.22.0.orig/devede devede-3.22.0/devede
+--- devede-3.22.0.orig/devede	2012-05-23 00:19:49.000000000 +0200
++++ devede-3.22.0/devede	2012-05-23 19:30:54.196406849 +0200
+@@ -292,7 +292,7 @@
+ global_vars["sub_codepage"]="ISO-8859-1"
+ global_vars["sub_language"]="EN (ENGLISH)"
+ global_vars["with_menu"]=True
+-global_vars["AC3_fix"]=False
++global_vars["AC3_fix"]=True
+ (a,b)=get_cores()
+ global_vars["cores"]=a
+ global_vars["hypercores"]=b
