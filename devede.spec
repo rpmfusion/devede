@@ -1,5 +1,5 @@
 Name: devede
-Version: 3.22.0
+Version: 3.23.0
 Release: 1%{?dist}
 Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
@@ -8,7 +8,7 @@ License: GPLv3+
 URL: http://www.rastersoft.com/programas/devede.html
 Source0: http://www.rastersoft.com/descargas/%{name}-%{version}.tar.bz2
 # Enable AC3_fix by default
-Patch0: %{name}-3.22.0-ac3.patch
+Patch0: %{name}-3.23.0-ac3.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -123,6 +123,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sun Oct 28 2012 Andrea Musuruane <musuruan@gmail.com> 3.23.0-1
+- Updated to version 3.23.0
+
 * Sun May 27 2012 Andrea Musuruane <musuruan@gmail.com> 3.22.0-1
 - Updated to version 3.22.0
 - Moved icon in %%{_datadir}/icons/hicolor
