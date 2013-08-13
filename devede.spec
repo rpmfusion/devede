@@ -1,16 +1,15 @@
+%{!?_pkgdocdir: %global _pkgdocdir %{_docdir}/%{name}-%{version}}
+
 Name: devede
 Version: 3.23.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
-Group: Applications/Multimedia
 License: GPLv3+
 URL: http://www.rastersoft.com/programas/devede.html
 Source0: http://www.rastersoft.com/descargas/%{name}-%{version}.tar.bz2
 # Enable AC3_fix by default
 Patch0: %{name}-3.23.0-ac3.patch
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch: noarch
 
@@ -49,7 +48,7 @@ dependencies are really small.
 sed -i 's!/usr/lib/!%{_datadir}/!' devede
 
 # Fix help directory
-sed -i 's!/usr/share/doc/devede!%{_docdir}/%{name}-%{version}!' devede
+sed -i 's!/usr/share/doc/devede!%{_pkgdocdir}!' devede
 
 # Remove backup files
 find . -name *\~ -exec rm {} \;
@@ -67,10 +66,10 @@ rm -rf $RPM_BUILD_ROOT
   --DESTDIR=$RPM_BUILD_ROOT \
   --prefix=%{_prefix} \
   --libdir=%{_datadir} \
-  --pkgdocdir=%{_docdir}/%{name}-%{version}
+  --pkgdocdir=%{_pkgdocdir}
 
 # remove debian files from doc
-rm $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/{copyright,changelog.Debian}
+rm $RPM_BUILD_ROOT%{_pkgdocdir}/{copyright,changelog.Debian}
 
 # replace devedesans.ttf with a symlink to DejaVuSans.ttf
 rm -rf $RPM_BUILD_ROOT%{_datadir}/%{name}/devedesans.ttf
@@ -79,7 +78,6 @@ ln -s %{_datadir}/fonts/dejavu/DejaVuSans.ttf $RPM_BUILD_ROOT%{_datadir}/%{name}
 # rename .desktop file 
 desktop-file-install \
   --delete-original \
-  --vendor livna \
   --add-category X-OutputGeneration \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications \
   $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
@@ -90,10 +88,6 @@ mv $RPM_BUILD_ROOT%{_datadir}/pixmaps/%{name}.svg \
   $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/scalable/apps/
 
 %find_lang %{name}
-
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 
 %post
@@ -112,17 +106,22 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %files -f %{name}.lang
-%defattr(-,root,root,-)
 %{_bindir}/%{name}
 %{_bindir}/%{name}_debug
 %{_bindir}/%{name}-debug
 %{_datadir}/%{name}
-%{_datadir}/applications/livna-%{name}.desktop
+%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
-%doc %{_docdir}/%{name}-%{version}
+%doc %{_pkgdocdir}
 
 
 %changelog
+* Tue Aug 13 2013 Andrea Musuruane <musuruan@gmail.com> 3.23.0-3
+- Dropped obsolete Group, Buildroot, %%clean and %%defattr
+- Dropped desktop vendor tag
+- Used unversioned docdir
+- Fixed date in changelog
+
 * Sun May 26 2013 Nicolas Chauvet <kwizart@gmail.com> - 3.23.0-2
 - Rebuilt for x264/FFmpeg
 
@@ -244,7 +243,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 * Fri Oct 26 2007 Andrea Musuruane <musuruan@gmail.com> 3.3-1
 - Updated to version 3.3.
 
-* Tue Sep 19 2007 Andrea Musuruane <musuruan@gmail.com> 3.2-1
+* Tue Sep 18 2007 Andrea Musuruane <musuruan@gmail.com> 3.2-1
 - Updated to version 3.2.
 - License changed to GPLv3 or later.
 - Updated icon cache scriptlets to be compliant to new guidelines.
