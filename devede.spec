@@ -2,7 +2,7 @@
 
 Name: devede
 Version: 3.23.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 License: GPLv3+
@@ -116,6 +116,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 3.23.0-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
 * Tue Aug 13 2013 Andrea Musuruane <musuruan@gmail.com> 3.23.0-3
 - Dropped obsolete Group, Buildroot, %%clean and %%defattr
 - Dropped desktop vendor tag
