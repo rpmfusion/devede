@@ -1,19 +1,22 @@
-%{!?_pkgdocdir: %global _pkgdocdir %{_docdir}/%{name}-%{version}}
+%global commit 858370b33484974e538f5a924e08b75432382c99 
+%global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name: devede
 Version: 3.23.0
-Release: 4%{?dist}
+Release: 5.20140821git%{?dist}
 Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 License: GPLv3+
 URL: http://www.rastersoft.com/programas/devede.html
-Source0: http://www.rastersoft.com/descargas/%{name}-%{version}.tar.bz2
+Source0: https://github.com/rastersoft/Devede/archive/%{commit}/%{name}-%{version}-%{shortcommit}.tar.gz
+
 # Enable AC3_fix by default
+# https://groups.google.com/d/msg/devede-forum/yMdC5bD2LgY/ztgdlfsKwooJ
 Patch0: %{name}-3.23.0-ac3.patch
 
 BuildArch: noarch
 
-BuildRequires: python >= 2.4
+BuildRequires: python-devel
 BuildRequires: gettext
 BuildRequires: desktop-file-utils
 Requires: mplayer
@@ -27,6 +30,7 @@ Requires: ImageMagick
 Requires: python >= 2.4
 Requires: pygtk2 >= 2.16
 Requires: pygtk2-libglade
+Requires: dbus-python
 Requires: dejavu-sans-fonts
 Requires: hicolor-icon-theme
 
@@ -41,14 +45,11 @@ dependencies are really small.
 
 
 %prep
-%setup -q
+%setup -q -n Devede-%{commit}
 %patch0 -p1
 
 # Fix module directory
-sed -i 's!/usr/lib/!%{_datadir}/!' devede
-
-# Fix help directory
-sed -i 's!/usr/share/doc/devede!%{_pkgdocdir}!' devede
+sed -i 's!/usr/lib/!%{python_sitelib}/!' devede
 
 # Remove backup files
 find . -name *\~ -exec rm {} \;
@@ -58,14 +59,12 @@ find . -name *\~ -exec rm {} \;
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
-
 ./install.sh \
   --uninstall=no \
   --targeted=yes \
   --DESTDIR=$RPM_BUILD_ROOT \
   --prefix=%{_prefix} \
-  --libdir=%{_datadir} \
+  --libdir=%{python_sitelib} \
   --pkgdocdir=%{_pkgdocdir}
 
 # remove debian files from doc
@@ -91,18 +90,18 @@ mv $RPM_BUILD_ROOT%{_datadir}/pixmaps/%{name}.svg \
 
 
 %post
-touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
+/bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %postun
 if [ $1 -eq 0 ] ; then
-    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+    /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
+    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 fi
 
 
 %posttrans
-gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %files -f %{name}.lang
@@ -110,12 +109,20 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_bindir}/%{name}_debug
 %{_bindir}/%{name}-debug
 %{_datadir}/%{name}
+%{python_sitelib}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
 %doc %{_pkgdocdir}
 
 
 %changelog
+* Tue Jan 05 2016 Andrea Musuruane <musuruan@gmail.com> - 3.23.0-5.20140821git
+- Updated to 20140821 git snapshot
+- Updated Source0 URL
+- Moved modules to %%{python_sitelib}
+- Added missing requires (BZ #3879)
+- Spec file clean up
+
 * Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 3.23.0-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
