@@ -3,7 +3,7 @@
 
 Name: devede
 Version: 3.23.0
-Release: 5.20140821git%{?dist}
+Release: 6.20140821git%{?dist}
 Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 License: GPLv3+
@@ -23,7 +23,6 @@ Requires: mplayer
 Requires: mencoder
 Requires: ffmpeg
 Requires: dvdauthor
-Requires: vcdimager
 Requires: mkisofs
 Requires: brasero
 Requires: ImageMagick
@@ -116,6 +115,9 @@ fi
 
 
 %changelog
+* Fri Jul 01 2016 Sérgio Basto <sergio@serjux.com> - 3.23.0-6.20140821git
+- Remove Requires: vcdimager ; package retired in F24
+
 * Tue Jan 05 2016 Andrea Musuruane <musuruan@gmail.com> - 3.23.0-5.20140821git
 - Updated to 20140821 git snapshot
 - Updated Source0 URL
