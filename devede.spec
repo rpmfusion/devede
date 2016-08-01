@@ -3,7 +3,7 @@
 
 Name: devede
 Version: 3.23.0
-Release: 7.20151018git%{?dist}
+Release: 8.20151018git%{?dist}
 Summary: A program to create video DVDs and CDs (VCD, sVCD or CVD)
 
 License: GPLv3+
@@ -116,6 +116,10 @@ fi
 
 
 %changelog
+* Mon Aug 01 2016 Sérgio Basto <sergio@serjux.com> - 3.23.0-8.20151018git
+-
+  https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
+
 * Fri Jul 08 2016 Sérgio Basto <sergio@serjux.com> - 3.23.0-7.20151018git
 - Readd Requires: vcdimager  
 - Update to git Oct 18, 2015 
